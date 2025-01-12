@@ -4,6 +4,7 @@ import { useJokes } from '../../hooks/useJokes'
 import { motion } from 'framer-motion'
 import { Trash2 } from 'lucide-react';
 import JokeCard from '../utils/JokeCard';
+import { NavLink } from 'react-router-dom';
 
 function JokeWall() {
 
@@ -62,7 +63,7 @@ function JokeWall() {
                 Mur des blagues
             </h1>
           
-          {/* Grille responsive */}
+          {/* Grille  */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {jokes
           .sort((a, b) => b.countOfLikes - a.countOfLikes)
@@ -78,11 +79,28 @@ function JokeWall() {
             
            
           />
+          
         ))}
 
+<div className='grid items-center grid-cols-1 gap-6 align-middle transition-all bg-red-400 border rounded-lg shadow-lg border-purple-cam-400 hover:scale-105 ' >
             
+
+        <div className="flex-grow space-y-8">
+        <p className="text-xl font-bold text-yellow-200 bubble">Afficher ma blague au mur</p>
+        <NavLink to="/create" >
+        <p
+        className="p-2 mx-auto mt-2 text-sm transition-all bg-yellow-200 border rounded-lg shadow-lg hover:scale-105 w-fit bubble text-purple-cam-400">Mon post-it</p>
+        </NavLink>
+      </div>
+
+
+</div>
+          
+
+
           </div>
         </div>
+      
       );
 }
 

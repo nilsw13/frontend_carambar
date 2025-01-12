@@ -25,7 +25,7 @@ function HomePage() {
   return (
     <div>
       <div className='flex flex-col items-center justify-center '>
-      <Header />
+      
 
       <HeroSection/>
 
@@ -46,14 +46,11 @@ function HomePage() {
       
      </div>
 
+    <section id="createDisplay">
      <div className="w-full h-fit  max-w-4xl p-10 mt-8 text-center  rounded-lg mb-[20vh]">
             <Outlet />
           </div>
-
-     <div className="relative flex items-center justify-center w-full">
-     <div className="absolute w-full h-px bg-gradient-to-r from-transparent via-carambar-700 to-transparent" />
-     <Separator title={"Contactez nous"}/>
-     </div>
+    </section>
 
      
 
@@ -61,7 +58,7 @@ function HomePage() {
       </div>
 
 
-      <Footer />
+     
       
     </div>
   )

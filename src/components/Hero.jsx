@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState }  from 'react'
 import { AnimatePresence, motion, useMotionValue, useTransform } from 'framer-motion'
 import carambar from '../assets/carableu.jpg'
 import banner from '../assets/banner.jpg'
+import mobil from '../assets/perso1.png'
 import { h1, li, style } from 'framer-motion/client'
 import { RotateCcw } from 'lucide-react'
 import { useJokes } from '../hooks/useJokes'
@@ -10,6 +11,20 @@ import { use } from 'react'
 
 function Hero() {
 
+
+ 
+ const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  
+ useEffect(() => {
+   const handleResize = () => {
+     setIsMobile(window.innerWidth < 768);
+   };
+
+  
+   window.addEventListener('resize', handleResize);
+
+   return () => window.removeEventListener('resize', handleResize);
+ }, []);
 
 
   const {
@@ -23,27 +38,17 @@ function Hero() {
 } = useJokes();
 
   const [isHovered, setIsHovered] = useState(false);
+  
 
-    // Utiliser une valeur motion pour suivre l'échelle (scale)
     const scale = useMotionValue(0)
   
-    // Transformer "scale" en "opacity"
-    // Quand scale est à 0, opacity est à 0. Quand scale est à 1, opacity est à 1.
+   
     const opacity = useTransform(scale, [0, 1], [0, 1])
 
 
-    const handleHoverButton = () => {
-        console.log('hover') 
-        
-        return (
-            <div className='absolute'>
-                <h1>hello</h1>
-            </div>
-        )
+  
 
-   
 
-    }
     const handleNewJoke = useCallback(async () => {
       console.log("Début handleNewJoke");
       const jokeData = await fetchRandomJoke();
@@ -53,25 +58,29 @@ function Hero() {
       console.log("Réponse:", answer);
   }, [fetchRandomJoke]);
 
+
+  
+
   useEffect(() => {
     handleNewJoke();
   } , [handleNewJoke])
 
     return (
         <motion.section
-        className="relative w-[77%] h-fit mb-[15vh] overflow-hidden bg-carambar-500 "
+        className="md:relative space-y-12  md:w-[77%] md:h-fit mb-[15vh] overflow-hidden bg-carambar-500 "
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1, ease: 'easeInOut' }}
         style={{ scale }}
       >
         {/* Conteneur pour centrerl'image */}
-        <div className="flex items-center justify-center w-full h-full md:p-6 artboard-horizontal phone-5">
+        <div className="mt-10 w-[80%] grid gap-8 mx-auto md:flex md:items-center md:justify-center md:h-full md:w-full md:mt-0 md:p-6 artboard-horizontal phone-5">
           
           <motion.img
-            src={banner}
+            key={isMobile ? 'mobile' : 'desktop'} 
+            src={isMobile ? mobil : banner}
             alt="Carambar Hero"
-            className="object-cover w-full h-auto max-w-full  shadow-xl md:transform md:scale-[0.9] md:w-fit md:rounded-lg"
+            className={`object-cover w-full h-auto max-w-full   md:transform md:scale-[0.9] md:w-fit md:rounded-lg ${isMobile} ? 'shadow-none' : 'shadow-xl'`}
             style={{
               opacity,
             }}
@@ -79,46 +88,56 @@ function Hero() {
 
         
 
-            {/* Conteneur pour le texte */}
+           
 
            {/* Conteneur pour le texte */}
-           {currentJoke && (
+           {currentJoke  && (
     <motion.div
         whileHover={{ scale: 1.1 }}
-        className="absolute right-[25%] w-[300px] min-h-[120px]  rounded-lg  p-6 flex flex-col gap-4 backdrop-blur-sm bubble "
+        className="md:absolute  md:right-[25%] bottom-[15%] md:w-[300px] md:min-h-[120px]  rounded-lg mt-10 mt:0  md:p-6 md:flex md:flex-col md:gap-4 bubble "
     >
         {/* Question avec gestion du texte long */}
-        <h1 className="text-xl font-bold leading-tight break-words lg:text-xl text-purple-cam-400 hyphens-auto -rotate-3">
+        <h1 className="mt-10 text-xl text-yellow-300 break-words md:text-xl md:mt-0 md:font-bold md:leading-tight lg:text-xl md:text-purple-cam-400 hyphens-auto -rotate-3">
             {currentJoke.question}
         </h1>
         
        
         
         {/* Réponse avec gestion du texte long */}
-        <h2 className="text-xl font-bold leading-tight break-words text-purple-cam-400 lg:text-xl hyphens-auto -rotate-3">
+        <h2 className="mb-5 break-words text-md md:text-xl md:font-bold md:leading-tight text-purple-cam-400 lg:text-xl hyphens-auto -rotate-3 md:mb-0">
             {currentJoke.answer}
         </h2>
     </motion.div>
 )}
 
-{/* Bouton de rafraîchissement repositionné */}
+{/* Bouton de rafraîchissement  */}
 <motion.div
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ rotate: -360}}
-    transition={{
-      duration: 0.9,
-      ease: "linear",
-      type: "spring"
-     
-    }}
-    className="absolute right-[18%] bottom-[20%] bg-white/90 rounded-full p-3 shadow-lg backdrop-blur-sm"
-    
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ rotate: isMobile ? 180 : -360 }}
+  transition={{
+    duration: isMobile ? 0.5 : 0.9, // Animation plus rapide sur mobile
+    ease: "linear",
+    type: "spring"
+  }}
+
+  className={`
+    rounded-full p-3 backdrop-blur-sm
+    ${isMobile 
+      ? 'fixed bottom-6 right-6 z-50 bg-carambar-500 shadow-lg' // Style mobile
+      : 'md:absolute md:right-[18%] md:bottom-[20%] md:bg-white/90 md:shadow-lg' // Style desktop
+    }
+  `}
 >
-    <RotateCcw 
-        className="text-3xl cursor-pointer text-carambar-500" 
-        onClick={handleNewJoke}
-        
-    />
+  <RotateCcw
+    className={`
+      cursor-pointer
+      ${isMobile 
+        ? 'text-2xl text-white' // monil
+        : 'text-sm md:text-3xl text-carambar-500' //desktpo
+      }
+    `}
+    onClick={handleNewJoke}
+  />
 </motion.div>
                       
 

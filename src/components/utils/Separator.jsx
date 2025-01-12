@@ -12,7 +12,7 @@ function Separator({title}) {
     <h2 className="p-2 text-2xl font-bold transform bg-white text-purple-cam-400 -rotate-2 bubble">
         {title}
     </h2>
-    {/* Petits éléments décoratifs */}
+   
     <div className="absolute w-3 h-3 transform -translate-y-1/2 rounded-full -left-4 top-1/2 bg-carambar-500" />
     <div className="absolute w-3 h-3 transform -translate-y-1/2 rounded-full -right-4 top-1/2 bg-carambar-500" />
 </motion.div>

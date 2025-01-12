@@ -54,12 +54,12 @@ const JokeCard = ({ joke, onLike, onDelete, loading, question, answer  }) => {
           </motion.button>
         ) : (
           <motion.button
-            className="p-2 bg-red-500 rounded-lg text-purple-cam-400/90"
+            className="p-1 bg-yellow-200 rounded-lg text-purple-cam-400/90"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.2 }}
             disabled
           >
-            <Trash2 />
+            <Trash2 className="rounded-lg " />
           </motion.button>
         )}
         
