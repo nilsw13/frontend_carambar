@@ -1,5 +1,5 @@
 import { Link } from "lucide-react";
-import logo from '../assets/logo.png'
+import logo from '../../public/assets/images//logo.png'
 
 export default function Footer() {
     return (

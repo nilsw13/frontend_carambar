@@ -19,14 +19,14 @@ const jokeSchema = z.object({
       // regex XSS
       .refine(
         (value) => {
-          // Cette regex détecte les balises, les scripts et autres éléments dangereux
+          
           const xssRegex = /(<|>|javascript:|data:|vbscript:|onload=|onerror=|onclick=|onmouseover=|\%00|\%0d|\%0a)/gi;
           return !xssRegex.test(value);
         },
         "Le texte contient des caractères non autorisés"
       )
       
-      // Protection contre les caractères spéciaux et de contrôle
+     
       .refine(
         (value) => {
           // regex caractères spéciaux
@@ -39,7 +39,7 @@ const jokeSchema = z.object({
       // only letters, numbers and simple punctuation
       .refine(
         (value) => {
-          // Cette regex autorise uniquement les caractères sûrs
+          
           const safeCharsRegex = /^[a-zA-ZÀ-ÿ0-9\s.,!?'-]*$/;
           return safeCharsRegex.test(value);
         },
@@ -72,14 +72,14 @@ const jokeSchema = z.object({
           // regex XSS
           .refine(
             (value) => {
-              // Cette regex détecte les balises, les scripts et autres éléments dangereux
+            
               const xssRegex = /(<|>|javascript:|data:|vbscript:|onload=|onerror=|onclick=|onmouseover=|\%00|\%0d|\%0a)/gi;
               return !xssRegex.test(value);
             },
             "Le texte contient des caractères non autorisés"
           )
           
-          // Protection contre les caractères spéciaux et de contrôle
+          
           .refine(
             (value) => {
               // regex caractères spéciaux
@@ -92,7 +92,7 @@ const jokeSchema = z.object({
           // only letters, numbers and simple punctuation
           .refine(
             (value) => {
-              // Cette regex autorise uniquement les caractères sûrs
+             
               const safeCharsRegex = /^[a-zA-ZÀ-ÿ0-9\s.,!?'-]*$/;
               return safeCharsRegex.test(value);
             },

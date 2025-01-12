@@ -1,12 +1,10 @@
 import React, { useCallback, useEffect, useState }  from 'react'
-import { AnimatePresence, motion, useMotionValue, useTransform } from 'framer-motion'
-import carambar from '../assets/carableu.jpg'
-import banner from '../assets/banner.jpg'
-import mobil from '../assets/perso1.png'
-import { h1, li, style } from 'framer-motion/client'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
+
+import banner from '../../public/assets/images/banner.jpg'
+import mobil from '../../public/assets/images/perso1.png'
 import { RotateCcw } from 'lucide-react'
 import { useJokes } from '../hooks/useJokes'
-import { use } from 'react'
 
 
 function Hero() {

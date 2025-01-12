@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { createPath, Link, NavLink } from 'react-router-dom'
-import logo from '../assets/logo2.png'
+import logo from '../../public/assets/images/logo.png'
 import { MenuIcon, XIcon, ShoppingCartIcon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { nav } from 'framer-motion/client'

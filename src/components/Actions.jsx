@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react'
-import perso2 from '../assets/perso2.png'
-import perso1 from '../assets/perso1.png'
+import React from 'react'
+import perso2 from '../../public/assets/images/perso2.png'
+import perso1 from '../../public/assets/images/perso1.png'
 import { ArrowUpRightFromSquareIcon } from 'lucide-react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 function Actions() {

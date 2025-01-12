@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import banner from '../assets/eshop1.png'
+import banner from '../../public/assets/images/eshop1.png'
 
 function Shop() {
   return (
