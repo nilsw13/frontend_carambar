@@ -2,7 +2,7 @@
 export default {
   content: [
       "./index.html",
-      "./src/**/*.{js,ts,jsx,tsx}",
+      "./src/**/*.{js,ts,jsx,tsx,jsx}",
   ],
   theme: {
       extend: {
@@ -22,5 +22,5 @@ export default {
           },
       }
   },
-  plugins: [require("daisyui")],
+  plugins: [require('daisyui')],
 } }

@@ -67,6 +67,55 @@ export function useJokes() {
         }
     }, []);
 
+
+    // we define a function to delete a joke by it's id
+
+   
+const deleteJokeById = useCallback(async (jokeId) => {
+    setLoading(true);
+    setError(null);
+    try {
+        console.log("joke to delete : ", jokeId)
+        const response = await api.delete(`/jokes/delete/${jokeId}`);
+        console.log("error: ", error)
+        console.log(response.data, response.status);
+        console.log("header: ", response.headers.get());
+        
+        
+    } catch (error) {
+        setError(error);
+    } finally {
+        setLoading(false);
+    }
+}, [api]);
+
+
+
+// we define a function to add a like on a joke by id 
+
+  const addALike = useCallback(async (jokeId) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+        const response = await api.post(`/jokes/${jokeId}/like`);
+        const updatedJoke = response.data.data;
+
+        // update list of jokes
+        setJokes((prevJokes) =>
+            prevJokes.map((joke) =>
+                joke.id === jokeId ? updatedJoke : joke
+            )
+        );
+        return updatedJoke;
+    }
+
+    catch (error) {
+        setError(error.response?.data?.message || "Une erreur est survenue");
+    } finally {
+        setLoading(false);
+    }
+  }, [setJokes]);
    // we reset errors state
 
    const clearError = useCallback(() => {
@@ -79,8 +128,10 @@ export function useJokes() {
         loading,
         error,
         submitJoke,
+        deleteJokeById,
         fetchJokes,
         fetchRandomJoke,
+        addALike,
         clearError
     }
 
