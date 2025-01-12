@@ -82,6 +82,7 @@ const deleteJokeById = useCallback(async (jokeId) => {
         console.log("header: ", response.headers.get());
         
         
+        
     } catch (error) {
         setError(error);
     } finally {

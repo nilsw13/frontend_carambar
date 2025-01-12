@@ -1,4 +1,4 @@
-import { div } from 'framer-motion/client'
+import { a, div } from 'framer-motion/client'
 import React, { useCallback, useEffect } from 'react'
 import { useJokes } from '../../hooks/useJokes'
 import { motion } from 'framer-motion'
@@ -39,8 +39,9 @@ function JokeWall() {
     }, [fetchJokes]);
 
     const handleDelete = async (jokeId) => {
-      deleteJokeById(jokeId);
+      await deleteJokeById(jokeId);
       fetchJokes();
+      return jokeId;
     }
 
     const handleLike = async (jokeId) => {
@@ -63,7 +64,9 @@ function JokeWall() {
           
           {/* Grille responsive */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {jokes.map((joke) => (
+          {jokes
+          .sort((a, b) => b.countOfLikes - a.countOfLikes)
+          .map((joke) => (
           <JokeCard
             question={joke.question}
             answer={joke.answer}

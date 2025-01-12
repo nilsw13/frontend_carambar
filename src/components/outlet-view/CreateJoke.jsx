@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useJokes } from '../../hooks/useJokes';
 import SuccesToast from '../utils/SuccesToast';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function CreateJoke() {
 
@@ -112,8 +113,18 @@ function CreateJoke() {
                     <p className="text-sm text-center text-red-500">{error}</p>
                 )}
             </form>
-
-            {showToast && <SuccesToast message="Blague créée avec succès" />}
+            
+            <AnimatePresence mode='wait'>
+            {showToast &&
+             <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+                className="p-2 bg-green-300 rounded-lg"
+             >
+                <SuccesToast message="Blague créée avec succès" /></motion.div>}
+            </AnimatePresence>
         </div>
     
   )
