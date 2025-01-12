@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useJokes } from '../../hooks/useJokes';
 import SuccesToast from '../utils/SuccesToast';
 import { AnimatePresence, motion } from 'framer-motion';
+import jokeSchema from '../../schemas/jokeSchema';
+import Toast from '../utils/Toast';
 
 function CreateJoke() {
 
@@ -15,7 +17,15 @@ function CreateJoke() {
 
     // we get from the useJokes hook the createJoke function and loading / error state
 
-    const { submitJoke, error, loading } = useJokes();
+    const { submitJoke, error, loading, setError } = useJokes();
+
+    const [errors, setErrors] = useState({});
+
+    const [toast, setToast] = useState({
+        message: '',
+        type: 'success',
+        isVisible: false
+      });
 
     // we now handle field changes
 
@@ -40,7 +50,12 @@ function CreateJoke() {
         }
 
         try {
-            const newJoke =  await submitJoke(formData);
+
+            const validatedData = jokeSchema.parse(formData);
+
+            console.log("validatedData :",validatedData);
+
+            const newJoke =  await submitJoke(validatedData);
 
             if (newJoke) {
                 setFormData({
@@ -48,22 +63,40 @@ function CreateJoke() {
                     answer: ''
                 });
                 console.log("joke created",newJoke);
-                setShowToast(true);
+                setToast({
+                    message: 'Votre blague a été créée avec succès !',
+                    type: 'success',
+                    isVisible: true
+                  });
 
-                 // Masquer le toast après 3 secondes
-                 setTimeout(() => {
-                    setShowToast(false);
-                }, 3000);
-                
+                 
 
             }
         } catch (error) {
-            console.error("error while creating joke",error);
+            if (error.errors) {
+                const errorMessages = error.errors.map(err => err.message).join(', ');
+                
+                setToast({
+                  message: errorMessages,
+                  type: 'error',
+                  isVisible: true
+                });
+                
+                // Mise à jour des erreurs de champ si nécessaire
+                const newErrors = {};
+                error.errors.forEach(err => {
+                  newErrors[err.path[0]] = err.message;
+                });
+                setErrors(newErrors);
+              }
+            }
+        
+            // Masquer le toast après 3 secondes
+            setTimeout(() => {
+              setToast(prev => ({ ...prev, isVisible: false }));
+            }, 3000);
+          };
 
-
-       
-    }
-    }
 
   return (
     <div className='grid gap-20'>
@@ -114,17 +147,7 @@ function CreateJoke() {
                 )}
             </form>
             
-            <AnimatePresence mode='wait'>
-            {showToast &&
-             <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
-                transition={{ duration: 0.5 }}
-                className="p-2 bg-green-300 rounded-lg"
-             >
-                <SuccesToast message="Blague créée avec succès" /></motion.div>}
-            </AnimatePresence>
+           <Toast message={toast.message} type={toast.type} isVisible={toast.isVisible} onClose={() => setToast(prev => ({ ...prev, isVisible: false }))} />
         </div>
     
   )

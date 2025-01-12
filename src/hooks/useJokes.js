@@ -128,6 +128,7 @@ const deleteJokeById = useCallback(async (jokeId) => {
         currentJoke,
         loading,
         error,
+        setError,
         submitJoke,
         deleteJokeById,
         fetchJokes,
