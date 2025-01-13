@@ -46,9 +46,9 @@ function Header() {
 
 
   const navItems = [
-    { name: 'Accueil', path: '/' },
-    { name: 'Créer une blague', path: '/create',  sectionId: 'createDisplay'  },
-    { name: 'Mur de blagues', path: '/jokes', sectionId: 'createDisplay'  },
+    { name: 'Accueil', path: '/frontend_carambar' },
+    { name: 'Créer une blague', path: '/frontend_carambar/create',  sectionId: 'createDisplay'  },
+    { name: 'Mur de blagues', path: '/frontend_carambar/jokes', sectionId: 'createDisplay'  },
     {
       name: (
         <motion.div
