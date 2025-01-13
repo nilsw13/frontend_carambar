@@ -13,7 +13,7 @@ function Actions() {
 
 
   return (
-    <div className='container px-4 mx-auto'> {/* Remplace w-screen qui peut causer des problèmes de dépassement */}
+    <div className='container px-4 mx-auto'> 
           
           
           

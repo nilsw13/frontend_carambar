@@ -43,7 +43,7 @@ function CreateJoke() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // basiq validation need to add ZOD later
+      
 
         if (!formData.question || !formData.answer) {
             return;
@@ -82,7 +82,6 @@ function CreateJoke() {
                   isVisible: true
                 });
                 
-                // Mise à jour des erreurs de champ si nécessaire
                 const newErrors = {};
                 error.errors.forEach(err => {
                   newErrors[err.path[0]] = err.message;
@@ -91,7 +90,6 @@ function CreateJoke() {
               }
             }
         
-            // Masquer le toast après 3 secondes
             setTimeout(() => {
               setToast(prev => ({ ...prev, isVisible: false }));
             }, 3000);

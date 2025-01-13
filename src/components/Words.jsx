@@ -9,19 +9,17 @@ function Words({ value }) {
   console.log("Valeur recue de value:", value);
   
   
-  // Correction de scrollYProgress (P majuscule)
   const { scrollYProgress } = useScroll({
     target: element,
     offset: ['end end', 'start start']
   });
 
-  // Assurons-nous que value est une chaîne de caractères
   const words = value.split(' ');
-  console.log("Mots après split:", words);
+ 
 
   return (
     <motion.div 
-    className=''  // Ajout de padding pour l'espacement
+    
     ref={element}
     style={{opacity: scrollYProgress}}
   >

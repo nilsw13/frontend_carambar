@@ -87,7 +87,7 @@ function JokeWall() {
 
         <div className="flex-grow space-y-8">
         <p className="text-xl font-bold text-yellow-200 bubble">Afficher ma blague au mur</p>
-        <NavLink to="/create" >
+        <NavLink to="/frontend_carambar/create" >
         <p
         className="p-2 mx-auto mt-2 text-sm transition-all bg-yellow-200 border rounded-lg shadow-lg hover:scale-105 w-fit bubble text-purple-cam-400">Mon post-it</p>
         </NavLink>

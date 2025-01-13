@@ -9,7 +9,6 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
-  // Gestionnaire de redimensionnement de fenêtre avec un debounce
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768)
@@ -99,7 +98,7 @@ function Header() {
         </nav>
       )}
 
-      {/* Menu Mobile avec Animation */}
+      {/* Menu Mobile */}
       <AnimatePresence>
         {isMobile && isMenuOpen && (
           <motion.div

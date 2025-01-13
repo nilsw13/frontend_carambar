@@ -27,12 +27,7 @@ function Hero() {
 
   const {
     currentJoke,
-    setCurrentJoke,
-    loading,
-    error,
     fetchRandomJoke,
-    createJoke,
-    clearError
 } = useJokes();
 
   const [isHovered, setIsHovered] = useState(false);
