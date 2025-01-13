@@ -12,6 +12,10 @@ function Hero() {
 
  
  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+ 
+
+ // state pour stocker l'id de la blague quon affichd ( la precedente de la prochaine :p)
+ const [previousJokeId, setPreviousJokeId] = useState(null);
   
  useEffect(() => {
    const handleResize = () => {
@@ -43,13 +47,40 @@ function Hero() {
 
 
     const handleNewJoke = useCallback(async () => {
-      console.log("Début handleNewJoke");
-      const jokeData = await fetchRandomJoke();
-      // jokeData contient déjà les données extraites, pas besoin de .data
-      const { question, answer } = jokeData;
-      console.log("Question:", question);
-      console.log("Réponse:", answer);
-  }, [fetchRandomJoke]);
+
+
+      // fonction pour recuperer une blague DIFFERENTE
+        const fetchDifferentJoke = async () => {
+          let newJoke = await fetchRandomJoke();
+          console.log("Nouvelle blague:", newJoke);
+          while (newJoke.id === previousJokeId) {
+            newJoke = await fetchRandomJoke();
+            console.log("Nouvelle blague:", newJoke);
+          }
+          return newJoke;
+          
+        };
+
+      // on recupere une nouvelle blague
+
+      try  {
+        const jokeData = await fetchRandomJoke();
+        const {id, answer, question } = jokeData;
+
+        // on sauvegarde l'id pour la comparaison
+        setPreviousJokeId(id);
+
+        console.log("Question:", question);
+        console.log("Réponse:", answer);
+
+
+      } catch (error) {
+        console.error("Erreur lors de la récupération d'une nouvelle blague:", error);
+      }
+
+
+
+  }, [fetchRandomJoke, previousJokeId]);
 
 
   
