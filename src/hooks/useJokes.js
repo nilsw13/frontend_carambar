@@ -20,7 +20,7 @@ export function useJokes() {
         setLoading(true)
         setError(null)
         try {
-            const response = await api.get('/jokes');
+            const response = await api.get('/v1/jokes');
             const jokesData = response.data.data;
             setJokes(jokesData);
             return jokesData;
@@ -38,7 +38,7 @@ export function useJokes() {
         setLoading(true)
         setError(null)
         try {
-            const response = await api.get('/jokes/random');
+            const response = await api.get('/v1/jokes/random');
             const jokeData = response.data.data;
             setCurrentJoke(jokeData);
             return jokeData;
@@ -56,7 +56,7 @@ export function useJokes() {
         setLoading(true)
         setError(null)
         try {
-            const response = await api.post('/jokes/create', jokeData);
+            const response = await api.post('/v1/jokes/create', jokeData);
             const joke = response.data.data;
             setJokes((prevJokes) => [joke, ...prevJokes]);
             return joke;
@@ -76,7 +76,7 @@ const deleteJokeById = useCallback(async (jokeId) => {
     setError(null);
     try {
         console.log("joke to delete : ", jokeId)
-        const response = await api.delete(`/jokes/delete/${jokeId}`);
+        const response = await api.delete(`/v1/jokes/delete/${jokeId}`);
         console.log("error: ", error)
         console.log(response.data, response.status);
         console.log("header: ", response.headers.get());
@@ -99,7 +99,7 @@ const deleteJokeById = useCallback(async (jokeId) => {
     setError(null);
 
     try {
-        const response = await api.post(`/jokes/${jokeId}/like`);
+        const response = await api.post(`/v1/jokes/${jokeId}/like`);
         const updatedJoke = response.data.data;
 
         // update list of jokes
