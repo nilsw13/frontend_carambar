@@ -47,7 +47,7 @@ Ajoutez les variables nécessaires :
 ```
 
 📂 Structure du Projet
-
+```
 frontend_carambar/
 ├── node_modules/
 ├── public/
@@ -64,6 +64,7 @@ frontend_carambar/
 │   ├── services/
 │   │   └── api/
 │   └── styles/
+```
 
 🤝 Contribution
 Les contributions sont les bienvenues ! Pour contribuer :
