@@ -60,14 +60,14 @@ function Header() {
           <ShoppingCartIcon />
         </motion.div>
       ),
-      path: 'shop'
+      path: '/frontend_carambar/shop'
     }
   ]
 
   return (
     <div className="relative md:w-2/3 w-[26vh] bg-yellow-200 navbar h-[6vh] md:h-[12vh] mt-10 mx-auto rounded-lg shadow-lg flex items-center justify-between px-4">
       <div className='flex-1'>
-        <Link to="/" className=''>
+        <Link to="/frontend_carambar" className=''>
           <img src={logo} className='w-32 h-20 transition-all md:h-32 left-8 md:w-52 hover:scale-110' alt="Logo" />
         </Link>
       </div>
