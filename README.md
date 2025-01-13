@@ -67,14 +67,25 @@ frontend_carambar/
 ```
 
 5. 🚀 Liens importants
-     ### Backend API repos
+     ### Backend API repos (hébérgé sur Render)
       [API REPOS](https://github.com/nilsw13)
 
 🤝 Contribution
 Les contributions sont les bienvenues ! Pour contribuer :
 
 Forkez le projet
-Créez une branche pour votre fonctionnalité (git checkout -b feature/AmazingFeature)
-Committez vos changements (git commit -m 'Add some AmazingFeature')
-Poussez vers la branche (git push origin feature/AmazingFeature)
-Ouvrez une Pull Request
+
+```bash
+### Créez une branche pour votre fonctionnalité ### 
+    (git checkout -b feature/AmazingFeature)
+
+###Committez vos changements### 
+(git commit -m 'Add some AmazingFeature')
+
+###Poussez vers la branche###
+
+(git push origin feature/AmazingFeature)
+
+
+###Ouvrez une Pull Request###
+```
