@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import HomePage from './pages/HomePage';
 import CreateJoke from './components/outlet-view/CreateJoke';
 import JokeWall from './components/outlet-view/JokeWall';
@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import Separator from './components/utils/Separator';
 
 
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -37,5 +37,4 @@ function App() {
     </Router>
   );
 }
-
 export default App
