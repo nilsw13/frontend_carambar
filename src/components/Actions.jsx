@@ -23,7 +23,7 @@ function Actions() {
 
 
               {/* Card 1 */}
-              <NavLink to='frontend_carambar/create'  className='relative p-2 mx-auto text-white rounded-lg card-normal w-fit md:w-96 h-fit'>
+              <NavLink to='create'  className='relative p-2 mx-auto text-white rounded-lg card-normal w-fit md:w-96 h-fit'>
                 {/* Image */}
                 <figure className='flex overflow-hidden bg-yellow-200 rounded-lg shadow-lg'>
                   <img
@@ -45,7 +45,7 @@ function Actions() {
 
 
               {/* Card 2 */}
-              <NavLink to='frontend_carambar/jokes' >
+              <NavLink to='jokes' >
               <div className='relative p-2 mx-auto text-white rounded-lg md:mx-0 card-normal w-fit md:w-96 h-fit'>
                 {/* Image */}
                 <figure className='flex overflow-hidden bg-yellow-200 rounded-lg shadow-lg'>
