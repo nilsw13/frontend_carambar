@@ -15,7 +15,9 @@ function Hero() {
  
 
  // state pour stocker l'id de la blague quon affichd ( la precedente de la prochaine :p)
- const [previousJokeId, setPreviousJokeId] = useState(null);
+ const [currentJoke, setCurrentJoke] = useState(null);        // Pour stocker la blague actuellement affichée
+ const [previousJokeId, setPreviousJokeId] = useState(null); // Pour mémoriser l'ID de la dernière blague affichée
+ const [isLoading, setIsLoading] = useState(false);    
   
  useEffect(() => {
    const handleResize = () => {
@@ -30,7 +32,7 @@ function Hero() {
 
 
   const {
-    currentJoke,
+
     fetchRandomJoke,
 } = useJokes();
 
@@ -47,47 +49,38 @@ function Hero() {
 
 
     const handleNewJoke = useCallback(async () => {
-
-
-      // fonction pour recuperer une blague DIFFERENTE
-        const fetchDifferentJoke = async () => {
-          let newJoke = await fetchRandomJoke();
-          console.log("Nouvelle blague:", newJoke);
-          while (newJoke.id === previousJokeId) {
-            newJoke = await fetchRandomJoke();
-            console.log("Nouvelle blague:", newJoke);
-          }
-          return newJoke;
-          
-        };
-
-      // on recupere une nouvelle blague
-
-      try  {
-        const jokeData = await fetchRandomJoke();
-        const {id, answer, question } = jokeData;
-
-        // on sauvegarde l'id pour la comparaison
-        setPreviousJokeId(id);
-
+      // Si déjà en chargement, on ne fait rien
+      if (isLoading) return;
+      setIsLoading(true);
+    
+      try {
+        // On récupère une première blague
+        let jokeData = await fetchRandomJoke();
+        
+        // Tant que la blague est la même que la précédente, on en récupère une nouvelle
+        while (jokeData.id === previousJokeId) {
+          console.log("Même blague détectée, on en cherche une autre...");
+          jokeData = await fetchRandomJoke();
+        }
+        
+        // Une fois qu'on a une blague différente, on met à jour l'affichage
+        const { id, question, answer } = jokeData;
+        setCurrentJoke({ question, answer }); // On met à jour la blague affichée
+        setPreviousJokeId(id);               // On sauvegarde son ID pour la prochaine comparaison
+        
         console.log("Question:", question);
         console.log("Réponse:", answer);
-
-
+        
       } catch (error) {
-        console.error("Erreur lors de la récupération d'une nouvelle blague:", error);
+        console.error("Erreur lors de la récupération de la blague:", error);
+      } finally {
+        setIsLoading(false);
       }
-
-
-
-  }, [fetchRandomJoke, previousJokeId]);
-
+    }, [previousJokeId, isLoading]);
 
   
 
-  useEffect(() => {
-    handleNewJoke();
-  } , [handleNewJoke])
+
 
     return (
         <motion.section
