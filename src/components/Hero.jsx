@@ -18,8 +18,7 @@ function Hero() {
  const [currentJoke, setCurrentJoke] = useState(null);        // Pour stocker la blague actuellement affichée
  const [previousJokeId, setPreviousJokeId] = useState(null); // Pour mémoriser l'ID de la dernière blague affichée
  const [isLoading, setIsLoading] = useState(false);    
- const [hasLoadedInitialJoke, setHasLoadedInitialJoke] = useState(false);
- 
+  
  useEffect(() => {
    const handleResize = () => {
      setIsMobile(window.innerWidth < 768);
@@ -80,27 +79,7 @@ function Hero() {
     }, [previousJokeId, isLoading]);
 
   
-    useEffect(() => {
-      if (!hasLoadedInitialJoke) {
-        const loadInitialJoke = async () => {
-          try {
-            setIsLoading(true);
-            const jokeData = await fetchRandomJoke();
-            const { id, question, answer } = jokeData;
-            setCurrentJoke({ question, answer });
-            setPreviousJokeId(id);
-            // On marque que la blague initiale a été chargée
-            setHasLoadedInitialJoke(true);
-          } catch (error) {
-            console.error("Erreur lors du chargement initial de la blague:", error);
-          } finally {
-            setIsLoading(false);
-          }
-        };
-  
-        loadInitialJoke();
-      }
-    }, [hasLoadedInitialJoke]);
+
 
 
     return (
