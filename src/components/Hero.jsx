@@ -37,7 +37,6 @@ function Hero() {
     fetchRandomJoke,
 } = useJokes();
 
-  const [isHovered, setIsHovered] = useState(false);
   
 
     const scale = useMotionValue(0)
@@ -77,9 +76,7 @@ function Hero() {
 
   
 
-  useEffect(() => {
-    handleNewJoke();
-  } , [handleNewJoke])
+ 
 
     return (
         <motion.section
