@@ -20,8 +20,8 @@ Git
 1. Clonez le dépôt :
 
 ```bash
-git clone https://github.com/votre-username/frontend_carambar.git
-cd frontend_carambar
+git clone https://github.com/votre-username/frontend_carembar.git
+cd frontend_carembar
 ```
 
 2. Installez les dépendances :
@@ -68,7 +68,7 @@ frontend_carambar/
 
 5. 🚀 Liens importants
      ### Backend API repos (hébérgé sur Render)
-      [API REPOS](https://github.com/nilsw13)
+      [API REPOS](https://github.com/nilsw13/api_carembar)
 
 🤝 Contribution
 Les contributions sont les bienvenues ! Pour contribuer :
