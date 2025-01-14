@@ -15,8 +15,11 @@ function Hero() {
  
 
  // state pour stocker l'id de la blague quon affichd ( la precedente de la prochaine :p)
- const [currentJoke, setCurrentJoke] = useState(null);        // Pour stocker la blague actuellement affichée
- const [previousJokeId, setPreviousJokeId] = useState(null); // Pour mémoriser l'ID de la dernière blague affichée
+ const [currentJoke, setCurrentJoke] = useState({
+  question: "Quel est le comble pour un joueur de bowling ?",
+  answer: "C’est de perdre la boule"
+});      // Pour stocker la blague actuellement affichée au demaragge de l'appli
+ const [previousJokeId, setPreviousJokeId] = useState(10); // Pour mémoriser l'ID de la dernière blague affichée
  const [isLoading, setIsLoading] = useState(false);    
   
  useEffect(() => {
