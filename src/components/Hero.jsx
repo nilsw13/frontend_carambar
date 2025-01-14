@@ -79,10 +79,24 @@ function Hero() {
     }, [previousJokeId, isLoading]);
 
   
+    useEffect(() => {
+      const loadInitialJoke = async () => {
+        try {
+          setIsLoading(true);
+          const jokeData = await fetchRandomJoke();
+          const { id, question, answer } = jokeData;
+          setCurrentJoke({ question, answer });
+          setPreviousJokeId(id);
+        } catch (error) {
+          console.error("Erreur lors du chargement initial de la blague:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+  
+      loadInitialJoke();
+    }, []);
 
-  useEffect(() => {
-    handleNewJoke();
-  } , [handleNewJoke])
 
     return (
         <motion.section
