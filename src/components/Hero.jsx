@@ -80,7 +80,9 @@ function Hero() {
 
   
 
-
+  useEffect(() => {
+    handleNewJoke();
+  } , [handleNewJoke])
 
     return (
         <motion.section
