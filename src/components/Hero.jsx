@@ -47,37 +47,41 @@ function Hero() {
 
 
     const handleNewJoke = useCallback(async () => {
-      console.log("Début handleNewJoke");
-      
-      try {
-        // On récupère d'abord une blague
-        let jokeData = await fetchRandomJoke();
-        
-        // On vérifie si c'est la même que la précédente
-        if (jokeData.id === previousJokeId) {
-          console.log("Même blague détectée, on en cherche une autre...");
-          // On fait maximum 3 tentatives pour éviter une boucle infinie
-          let attempts = 0;
-          while (jokeData.id === previousJokeId && attempts < 3) {
-            jokeData = await fetchRandomJoke();
-            attempts++;
+
+
+      // fonction pour recuperer une blague DIFFERENTE
+        const fetchDifferentJoke = async () => {
+          let newJoke = await fetchRandomJoke();
+          console.log("Nouvelle blague:", newJoke);
+          while (newJoke.id === previousJokeId) {
+            newJoke = await fetchRandomJoke();
+            console.log("Nouvelle blague:", newJoke);
           }
-        }
-        
-        const { id, question, answer } = jokeData;
-        
-        // On met à jour l'ID précédent
+          return newJoke;
+          
+        };
+
+      // on recupere une nouvelle blague
+
+      try  {
+        const jokeData = await fetchRandomJoke();
+        const {id, answer, question } = jokeData;
+
+        // on sauvegarde l'id pour la comparaison
         setPreviousJokeId(id);
-        
+
         console.log("Question:", question);
         console.log("Réponse:", answer);
-        
-        return jokeData;
-        
+
+
       } catch (error) {
-        console.error("Erreur lors de la récupération de la blague:", error);
+        console.error("Erreur lors de la récupération d'une nouvelle blague:", error);
       }
-    }, [previousJokeId, fetchRandomJoke]);
+
+
+
+  }, [fetchRandomJoke, previousJokeId]);
+
 
   
 
